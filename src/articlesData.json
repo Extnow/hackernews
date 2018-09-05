@@ -1,0 +1,18 @@
+[
+  {
+    "title": "React",
+    "url": "http://react.js.org/",
+    "author": "Jordan Wake",
+    "num_comments": 3,
+    "points": 4,
+    "id": 0
+  },
+  {
+    "title": "Redux",
+    "url": "http://redux.js.org/",
+    "author": "Dan Abramov",
+    "num_comments": 2,
+    "points": 5,
+    "id": 1
+  }
+]
