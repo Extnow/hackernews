@@ -7,7 +7,7 @@ import './App.css';
 const DEFAULT_QUERY = 'redux';
 const DEFAULT_HPP = '5';
 
-const PATH_BASE = 'https://hn.algolia.com/api/v1';
+const PATH_BASE = 'https://hn.algoli1a.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
@@ -17,6 +17,7 @@ export default class App extends React.Component {
   state = {
     articles: null,
     searchTerm: DEFAULT_QUERY,
+    error: null,
   };
 
   componentDidMount() {
@@ -29,7 +30,7 @@ export default class App extends React.Component {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
-      .catch(error => error);
+      .catch(error => this.setState({ error }));
   };
 
   setSearchTopStories = (articles) => {
@@ -66,8 +67,12 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { articles, searchTerm } = this.state;
+    const { articles, searchTerm, error } = this.state;
     const page = (articles && articles.page) || 0;
+
+    if (error) {
+      return <p>{error.message}</p>;
+    }
 
     if (!articles) {
       return null;
@@ -80,7 +85,7 @@ export default class App extends React.Component {
             Поиск
           </Search>
         </div>
-        {articles && <Table articles={articles.hits} onDismiss={this.onDismiss} />}
+        <Table articles={articles.hits} onDismiss={this.onDismiss} />
         <div className="interaction">
           <Button onClick={() => this.fetchSearchTopStories(searchTerm, page + 1)}>
             Больше историй
