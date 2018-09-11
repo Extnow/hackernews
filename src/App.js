@@ -34,7 +34,7 @@ export default class App extends React.Component {
       .catch(error => this.setState({ error }));
   };
 
-  setSearchTopStories = (articles) => {
+  setSearchTopStories = articles => {
     const { hits, page } = articles;
     const oldHits = page !== 0 ? hits : [];
     const updateHits = [...oldHits, ...hits];
@@ -43,13 +43,13 @@ export default class App extends React.Component {
     });
   };
 
-  onSearchSubmit = (event) => {
+  onSearchSubmit = event => {
     const { searchTerm } = this.state;
     this.fetchSearchTopStories(searchTerm);
     event.preventDefault();
   };
 
-  onDismiss = (id) => {
+  onDismiss = id => {
     const { articles } = this.state;
     const isNotId = item => item.objectID !== id;
     const updateHits = articles.hits.filter(isNotId);
@@ -58,16 +58,12 @@ export default class App extends React.Component {
     });
   };
 
-  onSearchChange = (event) => {
+  onSearchChange = event => {
     this.setState({ searchTerm: event.target.value });
   };
 
   render() {
-    const {
-      articles,
-      searchTerm,
-      error,
-    } = this.state;
+    const { articles, searchTerm, error } = this.state;
 
     const page = (articles && articles.page) || 0;
 
@@ -86,10 +82,7 @@ export default class App extends React.Component {
             Поиск
           </Search>
         </div>
-        <Table
-          articles={articles.hits}
-          onDismiss={this.onDismiss}
-        />
+        <Table articles={articles.hits} onDismiss={this.onDismiss} />
         <div className="interaction">
           <Button onClick={() => this.fetchSearchTopStories(searchTerm, page + 1)}>
             Больше историй

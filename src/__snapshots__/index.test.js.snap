@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App есть корректный снимок 1`] = `null`;
+
+exports[`Button есть корректный снимок 1`] = `
+<button
+  className=""
+  onClick={undefined}
+  type="button"
+>
+  Больше историй
+</button>
+`;
+
+exports[`Search есть корректный снимок 1`] = `
+<form
+  onSubmit={undefined}
+>
+  <input
+    onChange={undefined}
+    type="text"
+    value={undefined}
+  />
+  <button
+    type="submit"
+  >
+    Поиск
+  </button>
+</form>
+`;
